@@ -7,7 +7,7 @@ import mindGames.logic.Board;
 public class Pawn extends GamePiece {
 
 	public Pawn(String colorIn) {
-		super(colorIn, "pawn");
+		super(colorIn ,"pawn");
 
 		if (squareColor == "white") {
 			pieceSymbol = "wPa";

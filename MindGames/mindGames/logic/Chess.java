@@ -4,6 +4,8 @@ import java.awt.List;
 
 import mindGames.communication.components.*;
 import mindGames.controller.MindGameController;
+import mindGames.enums.GamePieces;
+import mindGames.factory.GamesPieceFactory;
 import mindGames.gamesPieces.Bishop;
 import mindGames.gamesPieces.BlankSpace;
 import mindGames.gamesPieces.King;
@@ -14,80 +16,23 @@ import mindGames.gamesPieces.Rook;
 
 public class Chess extends CommunicationComponent {
 
-	protected String Position1;
-	protected String Position2;
-	protected List Coordinates;
-	protected String GamePiece;
 	protected Player myPlayer1;
 	protected Player myPlayer2;
 	protected static final Board board = new Board();;
+	protected MindGameController controller =new MindGameController();
 
 	public Chess() {
 
 	}
 
-	public Chess(String Position1, String Position2, List Coordinates, String GamePiece) {
-
-		setPosition1(Position1);
-		setPosition2(Position2);
-		setCoordinates(Coordinates);
-		setGamePiece(GamePiece);
-	}
-
-	public String getPosition1() {
-		return Position1;
-	}
-
-	public void setPosition1(String position1) {
-		Position1 = position1;
-	}
-
-	public String getPosition2() {
-		return Position2;
-	}
-
-	public void setPosition2(String position2) {
-		Position2 = position2;
-	}
-
-	public List getCoordinates() {
-		return Coordinates;
-	}
-
-	public void setCoordinates(List coordinates) {
-		Coordinates = coordinates;
-	}
-
-	public String getGamePiece() {
-		return GamePiece;
-	}
-
-	public void setGamePiece(String gamePiece) {
-		GamePiece = gamePiece;
-	}
-
-	public Player getMyPlayer1() {
-		return myPlayer1;
-	}
-
-	public void setMyPlayer1(Player myPlayer1) {
-		this.myPlayer1 = myPlayer1;
-	}
-
-	public Player getMyPlayer2() {
-		return myPlayer2;
-	}
-
-	public void setMyPlayer2(Player myPlayer2) {
-		this.myPlayer2 = myPlayer2;
-	}
+	
 
 	@Override
 	protected void starGame(String player1, String player2) {
 
-		Player whitePly = new Player(player1, "white");
-		Player blackPly = new Player(player2, "black");
-
+		this.myPlayer1 = new Player(player1, "white");
+		this.myPlayer2 = new Player(player2, "black");
+        
 		setup(); // get board set
 
 		while (true) {
@@ -100,12 +45,12 @@ public class Chess extends CommunicationComponent {
 				while (true) {
 
 					if (runNum == 1) { // first run
-						move = whitePly.getMove();
+						move = myPlayer1.getMove();
 					} else { // second run
-						move = blackPly.getMove();
+						move = myPlayer2.getMove();
 					}
 
-					if (move[0][0] == -1) { // restarting loop if input is wrong
+					if (move[0][0] == -1) {
 						System.out.println("Invalid location. Try again.");
 						continue;
 					}
@@ -116,8 +61,7 @@ public class Chess extends CommunicationComponent {
 
 					boolean checkValue;
 					if (runNum == 1) {
-						checkValue = fromSquare.checkMove(moveFrom, moveTo, "white", false); // checking for pawn move
-																								// validity
+						checkValue = fromSquare.checkMove(moveFrom, moveTo, "white", false);
 					} else {
 						checkValue = fromSquare.checkMove(moveFrom, moveTo, "black", false);
 					}
@@ -126,39 +70,38 @@ public class Chess extends CommunicationComponent {
 
 						if (runNum == 1) {
 							if (checkForCheckOrMate("white") == "check") {
-								System.out.println("Check!");
+								this.controller.print("Check!");
 							}
 						} else {
 							if (checkForCheckOrMate("black") == "check") {
-								System.out.println("Check!");
+								this.controller.print("Check!");
 							}
 						}
 						break;
 					}
-					System.out.println("Invalid move. Try again."); // not printed if break is called
+					this.controller.print("Invalid move. Try again.");
 				}
 			}
 		}
 
 	}
 
+
 	protected static void setup() {
 
-		
-		
 		// board array and location x,y are inverted
-		board.square[0][0] = new Rook("black");
-		board.square[0][1] = new Knight("black");
-		board.square[0][2] = new Bishop("black");
-		board.square[0][3] = new Queen("black");
-		board.square[0][4] = new King("black");
-		board.square[0][5] = new Bishop("black");
-		board.square[0][6] = new Knight("black");
-		board.square[0][7] = new Rook("black");
-
+		board.square[0][0] = GamesPieceFactory.getGamePiece(GamePieces.ROOK, "black");
+		board.square[0][1] = GamesPieceFactory.getGamePiece(GamePieces.KNIGHT, "black");
+		board.square[0][2] = GamesPieceFactory.getGamePiece(GamePieces.BISHOP, "black");
+		board.square[0][3] = GamesPieceFactory.getGamePiece(GamePieces.QUEEN, "black");
+		board.square[0][4] = GamesPieceFactory.getGamePiece(GamePieces.KING, "black");
+		board.square[0][5] = GamesPieceFactory.getGamePiece(GamePieces.BISHOP,"black");
+		board.square[0][6] = GamesPieceFactory.getGamePiece(GamePieces.KNIGHT,"Black");
+		board.square[0][7] = GamesPieceFactory.getGamePiece(GamePieces.ROOK, "black");
 		// pawns
+		
 		for (int i = 0; i < 8; i++) {
-			board.square[1][i] = new Pawn("black");
+			board.square[1][i] = GamesPieceFactory.getGamePiece(GamePieces.PAW, "black");
 		}
 
 		for (int i = 2; i < 6; i++) { // creating blank spaces in middle
@@ -169,20 +112,22 @@ public class Chess extends CommunicationComponent {
 
 		// pawns
 		for (int i = 0; i < 8; i++) {
-			board.square[6][i] = new Pawn("white");
+			board.square[6][i] = GamesPieceFactory.getGamePiece(GamePieces.PAW, "white");
 		}
 
-		board.square[7][0] = new Rook("white");
-		board.square[7][1] = new Knight("white");
-		board.square[7][2] = new Bishop("white");
-		board.square[7][3] = new Queen("white");
-		board.square[7][4] = new King("white");
-		board.square[7][5] = new Bishop("white");
-		board.square[7][6] = new Knight("white");
-		board.square[7][7] = new Rook("white");
+		board.square[7][0] = GamesPieceFactory.getGamePiece(GamePieces.ROOK, "white");
+		board.square[7][1] = GamesPieceFactory.getGamePiece(GamePieces.KNIGHT, "white");
+		board.square[7][2] = GamesPieceFactory.getGamePiece(GamePieces.BISHOP, "white");
+		board.square[7][3] = GamesPieceFactory.getGamePiece(GamePieces.QUEEN, "white");
+		board.square[7][4] = GamesPieceFactory.getGamePiece(GamePieces.KING, "white");
+		board.square[7][5] = GamesPieceFactory.getGamePiece(GamePieces.BISHOP, "white");
+		board.square[7][6] = GamesPieceFactory.getGamePiece(GamePieces.KNIGHT, "white");
+		board.square[7][7] = GamesPieceFactory.getGamePiece(GamePieces.ROOK, "white");
 
 	}
-
+	
+	
+	
 	private static String checkForCheckOrMate(String plyColor) { // check for win or check
 		for (int kingY = 0; kingY < 8; kingY++) {
 			for (int kingX = 0; kingX < 8; kingX++) {
@@ -191,7 +136,7 @@ public class Chess extends CommunicationComponent {
 				String kingColor;
 				if (plyColor == "white") {
 					kingColor = "black";
-				} else { // black
+				} else {
 					kingColor = "white";
 				}
 

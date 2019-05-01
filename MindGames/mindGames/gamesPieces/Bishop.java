@@ -6,14 +6,16 @@ import mindGames.logic.GamePiece;
 import mindGames.logic.Squares;
 
 public class Bishop extends GamePiece {
+	
 
 	public Bishop(String colorIn) {
-		super(colorIn, "bishop");
-
+		
+        super(colorIn,"bishop");
 		if (squareColor == "white") {
-			pieceSymbol = "wBi";
+			pieceSymbol="wBi";
 		} else {
-			pieceSymbol = "bBi";
+			pieceSymbol="bBi";
+		
 		}
 	}
 	

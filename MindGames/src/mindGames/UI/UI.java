@@ -12,7 +12,7 @@ import mindGames.enums.Games;
 public class UI {
 	static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	static PrintStream out = System.out;
-	static MindGameController mainController;;
+	static MindGameController mainController = new MindGameController();
     static final Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException, Exception {
@@ -84,24 +84,25 @@ public class UI {
 		
 	     String pl1= "";
 		 String pl2= "";
+		 
 		switch (opc) {
 		case 1:
 			
 			pl1 = getName(1,null );
 			pl2= getName(2,pl1 );
-			mainController.getInstance().startGame(Games.CHESS,pl1,pl2);
+			mainController.startGame(Games.CHESS,pl1,pl2);
 			
 			
 			break;
 		case 2:
 			pl1 = getName(1,null );
 			pl2= getName(2,pl1 );
-			mainController.getInstance().startGame(Games.CHINESECHECKERS,pl1,pl2);
+			mainController.startGame(Games.CHINESECHECKERS,pl1,pl2);
 			break;
 		case 3:
 			pl1 = getName(1,null );
 			pl2= getName(2,pl1 );
-			mainController.getInstance().startGame(Games.GO,pl1,pl2);
+			mainController.startGame(Games.GO,pl1,pl2);
 			break;
 		
 		case 4:

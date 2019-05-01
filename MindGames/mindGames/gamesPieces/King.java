@@ -8,7 +8,7 @@ import mindGames.logic.Squares;
 public class King extends GamePiece {
 
 	public King(String colorIn) {
-		super(colorIn, "king");
+		super(colorIn,"king");
 
 		if (squareColor== "white") {
 			pieceSymbol = "wKi";

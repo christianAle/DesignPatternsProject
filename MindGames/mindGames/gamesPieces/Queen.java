@@ -7,14 +7,16 @@ import mindGames.logic.Squares;
 
 public class Queen extends GamePiece {
 
+
 	public Queen(String colorIn) {
-		super(colorIn, "queen");
+		super(colorIn,"queen");
 		
-		if(squareColor == "white"){
-			pieceSymbol = "wQu";
+   		if(squareColor == "white"){
+   			pieceSymbol="wQu";
 		}
 		else{
-			pieceSymbol = "bQu";
+			pieceSymbol="bQu";
+		
 		}
 	}
   

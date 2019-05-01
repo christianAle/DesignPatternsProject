@@ -6,9 +6,8 @@ import src.mindGames.UI.UI;
 
 public class MindGameController {
 
-	private static MindGameController instance;
 
-	private MindGameController() {
+	public  MindGameController() {
 	}
 
 	public void startGame(Games game, String player1, String player2) {
@@ -21,11 +20,6 @@ public class MindGameController {
 		UI.print(text);
 	}
 
-	public static MindGameController getInstance() {
-		if (instance == null) {
-			instance = new MindGameController();
-		}
-		return instance;
-	}
+	
 
 }

@@ -6,11 +6,11 @@ public abstract class Squares {
   public String squareColor; 
   public String type;
 
-  
-  public Squares(String typeIn){
+    
+  public Squares( String typeIn){
 		this.type = typeIn;
+		
 	}
-
 	
 	public String getPieceSymbol() {
 		return pieceSymbol;
@@ -45,7 +45,5 @@ public abstract class Squares {
 	public abstract boolean checkMove(int[] moveFromReq, int[] moveToReq, String plyColor, boolean testKing);
 
 	
-
-
   
 }
