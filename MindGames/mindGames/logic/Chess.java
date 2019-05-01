@@ -1,6 +1,7 @@
 package mindGames.logic;
 
 import java.awt.List;
+import java.util.Scanner;
 
 import mindGames.communication.components.*;
 import mindGames.controller.MindGameController;
@@ -20,13 +21,23 @@ public class Chess extends CommunicationComponent {
 	protected Player myPlayer2;
 	protected static final Board board = new Board();;
 	protected MindGameController controller =new MindGameController();
-
-	public Chess() {
+	public static final Scanner scanner = new Scanner(System.in);
+    private static Chess instance;
+	private Chess() {
 
 	}
 
 	
 
+	
+	public static synchronized Chess getInstance () {
+		if (instance==null) {
+			instance = new Chess();
+		}
+		
+		return instance;
+	}
+	
 	@Override
 	protected void starGame(String player1, String player2) {
 
@@ -34,9 +45,12 @@ public class Chess extends CommunicationComponent {
 		this.myPlayer2 = new Player(player2, "black");
         
 		setup(); // get board set
-
+     
+		
+	      
+     	    
 		while (true) {
-
+                  
 			for (int runNum = 1; runNum <= 2; runNum++) { // run for each player
 				board.drawBoardForChess(); // show board
 
@@ -46,6 +60,7 @@ public class Chess extends CommunicationComponent {
 
 					if (runNum == 1) { // first run
 						move = myPlayer1.getMove();
+						
 					} else { // second run
 						move = myPlayer2.getMove();
 					}

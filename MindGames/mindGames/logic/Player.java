@@ -10,11 +10,11 @@ public class Player {
 	private String namePlayer;
 	private String color;
 	State state;
-	
+
 	private final Scanner scanner = new Scanner(System.in);
 
 	public Player() {
-		
+
 	}
 
 	public String getColor() {
@@ -63,19 +63,20 @@ public class Player {
 		return numOut;
 	}
 
-	public int[][] getMove() { 
-
+	public int[][] getMove() {
+		String out = "";
 		int[][] move = new int[2][2];
+
 		for (int runNum = 1; runNum <= 2; runNum++) {
+
 			while (true) {
 				if (runNum == 1) {
-			       UI.print(namePlayer + ", input your location to move from. (EX: E4)\n>> "); 
-				} else { 
-					UI.print(namePlayer + ", input you location to move to. (EX: E4)\n>> ");
+					UI.print(namePlayer + ", indique la ficha que quiere mover. (EX: E4)\n>> ");
+				} else {
+					UI.print(namePlayer + ", indique donde quiere que la ficha se mueva. (EX: E4)\n>> ");
 				}
 				String moveIn = scanner.nextLine().trim();
 
-				
 				if (!moveIn.isEmpty() && moveIn.length() <= 2 && !(moveIn.contains(" ") || moveIn.contains("\t"))) {
 
 					if (!Character.isDigit(moveIn.charAt(0)) && Character.isDigit(moveIn.charAt(1))) {

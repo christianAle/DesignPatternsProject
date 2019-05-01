@@ -9,10 +9,18 @@ public class ChineseCheckers extends CommunicationComponent {
   
     Scanner scanner = new Scanner(System.in);
     Player player1 = new Player();
-	
-	public  ChineseCheckers () 
+	private  static ChineseCheckers instance;
+	private  ChineseCheckers () 
 	{
 		
+	}
+	
+	
+	public static synchronized ChineseCheckers getInstance() {
+		if(instance ==null) {
+			instance = new ChineseCheckers();
+		}
+		return instance;
 	}
 
 	@Override

@@ -121,7 +121,7 @@ public class UI {
 		String name;
 
 		while (true) {
-			System.out.print("Player " + playerNum + " please enter your name.\n>> ");
+			System.out.print("Jugador " + playerNum + " por favor indique su nombre \n>> ");
 			name = scanner.nextLine().trim();
 
 			if (!name.isEmpty() && !(name.contains(" ") || name.contains("\t")) && !name.equals(prevName))

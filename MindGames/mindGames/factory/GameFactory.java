@@ -17,15 +17,15 @@ public class GameFactory {
 
 		case CHESS:
 
-			return new Chess();
+			return Chess.getInstance();
 
 		case GO:
 
-			return new Chess();
+			return  null;
 
 		case CHINESECHECKERS:
 
-			return new ChineseCheckers();
+			return  ChineseCheckers.getInstance();
 
 		default:
 			throw new RuntimeException("Not implemented");
