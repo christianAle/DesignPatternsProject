@@ -6,6 +6,6 @@ KING,
 KNIGHT,
 PAW,
 QUEEN,
-ROOK
-
+ROOK,
+FICHA
 }

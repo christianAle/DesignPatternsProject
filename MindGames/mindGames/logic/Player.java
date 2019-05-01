@@ -1,5 +1,6 @@
 package mindGames.logic;
 
+import java.lang.Thread.State;
 import java.util.Scanner;
 
 import src.mindGames.UI.UI;
@@ -8,7 +9,13 @@ public class Player {
 
 	private String namePlayer;
 	private String color;
+	State state;
+	
 	private final Scanner scanner = new Scanner(System.in);
+
+	public Player() {
+		
+	}
 
 	public String getColor() {
 		return color;

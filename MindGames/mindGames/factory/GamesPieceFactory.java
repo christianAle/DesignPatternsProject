@@ -1,7 +1,9 @@
 package mindGames.factory;
 
+import mindGames.enums.ColorFicha;
 import mindGames.enums.GamePieces;
 import mindGames.gamesPieces.Bishop;
+import mindGames.gamesPieces.Ficha;
 import mindGames.gamesPieces.King;
 import mindGames.gamesPieces.Knight;
 import mindGames.gamesPieces.Pawn;
@@ -32,10 +34,19 @@ public class GamesPieceFactory {
 		
 		case ROOK:
 			return new Rook(color);
-			
+		
 		default:
 			throw new RuntimeException("Not implemented");	
 			
 		}
 	}
+	
+	public static Ficha getBlackChecker() {
+		return new Ficha(ColorFicha.Black);
+	}
+	
+	public static Ficha getWhiteChecker() {
+		return new Ficha(ColorFicha.White);
+	}
+	
 }

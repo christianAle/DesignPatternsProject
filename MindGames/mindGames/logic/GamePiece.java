@@ -9,7 +9,4 @@ public  abstract class GamePiece extends Squares {
 		
 	}
 
-	
-
-
 }
